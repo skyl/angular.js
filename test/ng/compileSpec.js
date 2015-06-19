@@ -528,11 +528,11 @@ describe('$compile', function() {
       it('should handle exceptions', function() {
         module(function($exceptionHandlerProvider) {
           $exceptionHandlerProvider.mode('log');
-          directive('factoryError', function() { throw 'FactoryError'; });
+          directive('factoryError', function() { throw new Error('FactoryError'); });
           directive('templateError',
-              valueFn({ compile: function() { throw 'TemplateError'; } }));
+              valueFn({ compile: function() { throw new Error('TemplateError'); } }));
           directive('linkingError',
-              valueFn(function() { throw 'LinkingError'; }));
+              valueFn(function() { throw new Error('LinkingError'); }));
         });
         inject(function($rootScope, $compile, $exceptionHandler) {
           element = $compile('<div factory-error template-error linking-error></div>')($rootScope);
