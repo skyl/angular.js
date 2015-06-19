@@ -2183,7 +2183,7 @@ describe('parser', function() {
 
       it('should short-circuit AND operator', function() {
         scope.run = function() {
-          throw "IT SHOULD NOT HAVE RUN";
+          throw new Error("IT SHOULD NOT HAVE RUN");
         };
         expect(scope.$eval('false && run()')).toBe(false);
         expect(scope.$eval('false && true && run()')).toBe(false);
@@ -2191,7 +2191,7 @@ describe('parser', function() {
 
       it('should short-circuit OR operator', function() {
         scope.run = function() {
-          throw "IT SHOULD NOT HAVE RUN";
+          throw new Error("IT SHOULD NOT HAVE RUN");
         };
         expect(scope.$eval('true || run()')).toBe(true);
         expect(scope.$eval('true || false || run()')).toBe(true);
