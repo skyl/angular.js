@@ -1589,7 +1589,7 @@ describe('Scope', function() {
 
     it('should pass thrown exceptions to $exceptionHandler', inject(function($rootScope, $browser, $exceptionHandler) {
       $rootScope.$applyAsync(function() {
-        throw 'OOPS';
+        throw new Error('OOPS');
       });
 
       $browser.defer.flush();
@@ -1601,7 +1601,7 @@ describe('Scope', function() {
 
     it('should evaluate subsequent expressions after an exception is thrown', inject(function($rootScope, $browser) {
       $rootScope.$applyAsync(function() {
-        throw 'OOPS';
+        throw new Error('OOPS');
       });
       $rootScope.$applyAsync('x = "All good!"');
 
@@ -1799,7 +1799,7 @@ describe('Scope', function() {
 
       it('should dispatch exceptions to the $exceptionHandler',
           inject(function($exceptionHandler) {
-        child.$on('myEvent', function() { throw 'bubbleException'; });
+        child.$on('myEvent', function() { throw new Error('bubbleException'); });
         grandChild.$emit('myEvent');
         expect(log).toEqual('2>1>0>');
         expect($exceptionHandler.errors).toEqual(['bubbleException']);
