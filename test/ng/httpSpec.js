@@ -30,7 +30,7 @@ describe('$http', function() {
     });
 
     if ($exceptionHandler.errors.length) {
-      throw 'Unhandled exceptions trapped in $exceptionHandler!';
+      throw new Error('Unhandled exceptions trapped in $exceptionHandler!');
     }
 
     $rootScope.$digest();
