@@ -667,7 +667,7 @@ describe('injector', function() {
       it('should handle exceptions', function() {
         expect(function() {
           createInjector([function() {
-            throw 'MyError';
+            throw new Error('MyError');
           }], {});
         }).toThrowMinErr('$injector', 'modulerr', /Failed to instantiate module .+ due to:\n.*MyError/);
       });
@@ -891,7 +891,7 @@ describe('injector', function() {
 
     it('should handle constructor exception', function() {
       expect(function() {
-        $injector.instantiate(function() { throw 'MyError'; });
+        $injector.instantiate(function() { throw new Error('MyError'); });
       }).toThrow('MyError');
     });
 
