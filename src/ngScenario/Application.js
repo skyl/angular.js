@@ -35,7 +35,7 @@ angular.scenario.Application.prototype.getFrame_ = function() {
 angular.scenario.Application.prototype.getWindow_ = function() {
   var contentWindow = this.getFrame_().prop('contentWindow');
   if (!contentWindow) {
-    throw 'Frame window is not accessible.';
+    throw new Error('Frame window is not accessible.');
   }
   return contentWindow;
 };
@@ -113,7 +113,7 @@ angular.scenario.Application.prototype.executeAction = function(action) {
   var self = this;
   var $window = this.getWindow_();
   if (!$window.document) {
-    throw 'Sandbox Error: Application document not accessible.';
+    throw new Error('Sandbox Error: Application document not accessible.');
   }
   if (!$window.angular) {
     return action.call(this, $window, _jQuery($window.document));
