@@ -161,7 +161,7 @@ describe('$timeout', function() {
 
     it('should delegate exception to the $exceptionHandler service', inject(
         function($timeout, $exceptionHandler) {
-      $timeout(function() { throw "Test Error"; });
+      $timeout(function() { throw new Error("Test Error"); });
       expect($exceptionHandler.errors).toEqual([]);
 
       $timeout.flush();
@@ -173,7 +173,7 @@ describe('$timeout', function() {
         function($timeout, $rootScope) {
       var applySpy = spyOn($rootScope, '$apply').andCallThrough();
 
-      $timeout(function() { throw "Test Error"; });
+      $timeout(function() { throw new Error("Test Error"); });
       expect(applySpy).not.toHaveBeenCalled();
 
       $timeout.flush();
@@ -183,7 +183,7 @@ describe('$timeout', function() {
 
     it('should reject the timeout promise when an exception is thrown in the timeout callback',
         inject(function($timeout, log) {
-      var promise = $timeout(function() { throw "Some Error"; });
+      var promise = $timeout(function() { throw new Error("Some Error"); });
 
       promise.then(log.fn('success'), function(reason) { log('error: ' + reason); });
       $timeout.flush();
@@ -216,7 +216,7 @@ describe('$timeout', function() {
       // $browser.defer.cancel is only called on cancel if the deferred object is still referenced
       var cancelSpy = spyOn($browser.defer, 'cancel').andCallThrough();
 
-      var promise = $timeout(function() { throw "Test Error"; }, 0, false);
+      var promise = $timeout(function() { throw new Error("Test Error"); }, 0, false);
       $timeout.flush();
 
       expect(cancelSpy).not.toHaveBeenCalled();
