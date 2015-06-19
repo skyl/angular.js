@@ -2099,7 +2099,7 @@ describe('q', function() {
 
 
     it('should still reject the promise, when exception is thrown in success handler, even if exceptionHandler rethrows', function() {
-      deferred.promise.then(function() { throw 'reject'; }).then(null, errorSpy);
+      deferred.promise.then(function() { throw new Error('reject'); }).then(null, errorSpy);
       deferred.resolve('resolve');
       mockNextTick.flush();
       expect(exceptionExceptionSpy).toHaveBeenCalled();
@@ -2108,7 +2108,7 @@ describe('q', function() {
 
 
     it('should still reject the promise, when exception is thrown in error handler, even if exceptionHandler rethrows', function() {
-      deferred.promise.then(null, function() { throw 'reject again'; }).then(null, errorSpy);
+      deferred.promise.then(null, function() { throw new Error('reject again'); }).then(null, errorSpy);
       deferred.reject('reject');
       mockNextTick.flush();
       expect(exceptionExceptionSpy).toHaveBeenCalled();
