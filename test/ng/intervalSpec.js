@@ -214,7 +214,7 @@ describe('$interval', function() {
 
     it('should delegate exception to the $exceptionHandler service', inject(
         function($interval, $exceptionHandler, $window) {
-      $interval(function() { throw "Test Error"; }, 1000);
+      $interval(function() { throw new Error("Test Error"); }, 1000);
       expect($exceptionHandler.errors).toEqual([]);
 
       $window.flush(1000);
@@ -229,7 +229,7 @@ describe('$interval', function() {
         function($interval, $rootScope, $window) {
       var applySpy = spyOn($rootScope, '$apply').andCallThrough();
 
-      $interval(function() { throw "Test Error"; }, 1000);
+      $interval(function() { throw new Error("Test Error"); }, 1000);
       expect(applySpy).not.toHaveBeenCalled();
 
       $window.flush(1000);
@@ -240,7 +240,7 @@ describe('$interval', function() {
     it('should still update the interval promise when an exception is thrown',
         inject(function($interval, $window) {
       var log = [],
-          promise = $interval(function() { throw "Some Error"; }, 1000);
+          promise = $interval(function() { throw new Error("Some Error"); }, 1000);
 
       promise.then(function(value) { log.push('promise success: ' + value); },
                  function(err) { log.push('promise error: ' + err); },
