@@ -141,7 +141,7 @@ describe('cookie options', function() {
                   if (prev === undefined) {
                     return pair[1] === undefined ? true : pair[1];
                   } else {
-                    throw 'duplicate key in cookie string';
+                    throw new Error('duplicate key in cookie string');
                   }
                 } else {
                   return prev;
