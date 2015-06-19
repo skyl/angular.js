@@ -479,7 +479,7 @@ describe('input', function() {
   it('should report error on assignment error', function() {
     expect(function() {
       var inputElm = helper.compileInput('<input type="text" ng-model="throw \'\'">');
-    }).toThrowMinErr("$parse", "syntax", "Syntax Error: Token '''' is an unexpected token at column 7 of the expression [throw ''] starting at [''].");
+    }).toThrowMinErr("$parse", "syntax", "Syntax Error: Token '''' is an unexpected token at column 7 of the expression [throw new Error(''] starting at ['']."));
   });
 
 
